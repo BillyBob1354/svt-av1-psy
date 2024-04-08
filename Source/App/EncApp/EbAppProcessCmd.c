@@ -939,12 +939,13 @@ void process_output_stream_buffer(EncChannel *channel, EncApp *enc_app, int32_t 
                 break;
             case 2:
                 fprintf(stderr,
-                        "\rEncoding frame %4d %.2f kbps %.2f fp%c  ",
+                        "\rEncoding: %4d/%4d Frames @ %.2f fp%c | %.2f kbps | Time: %d:%02d:%02d [-%d:%02d:%02d] | Size: %.2f MB [%.2f MB]",
                         *frame_count,
-                        ((double)(app_cfg->performance_context.byte_count << 3) * frame_rate /
-                         (app_cfg->frames_encoded * 1000)),
+                        app_cfg->frames_to_be_encoded,
                         fps >= 1.0 ? fps : fps * 60,
-                        fps >= 1.0 ? 's' : 'm');
+                        fps >= 1.0 ? 's' : 'm',
+                        ((double)(app_cfg->performance_context.byte_count << 3) * frame_rate / (app_cfg->frames_encoded * 1000)),
+                        ete_hours, ete_minutes, ete_seconds, eta_hours, eta_minutes, eta_seconds, size, estsz);
                 break;
             case 3:
                 if ((int)app_cfg->frames_to_be_encoded == -1) {
@@ -1070,12 +1071,13 @@ void process_output_stream_buffer(EncChannel *channel, EncApp *enc_app, int32_t 
                 break;
             case 2:
                 fprintf(stderr,
-                        "\rEncoding frame %4d %.2f kbps %.2f fp%c  ",
+                        "\rEncoding: %4d/%4d Frames @ %.2f fp%c | %.2f kbps | Time: %d:%02d:%02d [-%d:%02d:%02d] | Size: %.2f MB [%.2f MB]",
                         *frame_count,
-                        ((double)(app_cfg->performance_context.byte_count << 3) * frame_rate /
-                         (app_cfg->frames_encoded * 1000)),
+                        app_cfg->frames_to_be_encoded,
                         fps >= 1.0 ? fps : fps * 60,
-                        fps >= 1.0 ? 's' : 'm');
+                        fps >= 1.0 ? 's' : 'm',
+                        ((double)(app_cfg->performance_context.byte_count << 3) * frame_rate / (app_cfg->frames_encoded * 1000)),
+                        ete_hours, ete_minutes, ete_seconds, eta_hours, eta_minutes, eta_seconds, size, estsz);
                 break;
             case 3:
                 if ((int)app_cfg->frames_to_be_encoded == -1) {
